@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Bricolage Grotesque (Display) ── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Outfit (Body) ── */
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* StudyChat vibrant dark palette */
+    --background: 0.14 0.018 268;
+    --foreground: 0.96 0.008 268;
+
+    --card: 0.18 0.022 268;
+    --card-foreground: 0.96 0.008 268;
+
+    --popover: 0.2 0.025 268;
+    --popover-foreground: 0.96 0.008 268;
+
+    /* Electric coral primary */
+    --primary: 0.72 0.19 28;
+    --primary-foreground: 0.99 0 0;
+
+    /* Indigo secondary */
+    --secondary: 0.24 0.035 268;
+    --secondary-foreground: 0.85 0.04 268;
+
+    --muted: 0.22 0.025 268;
+    --muted-foreground: 0.62 0.04 268;
+
+    /* Vivid violet accent */
+    --accent: 0.58 0.22 290;
+    --accent-foreground: 0.99 0 0;
+
+    --destructive: 0.62 0.24 27;
+    --destructive-foreground: 0.99 0 0;
+
+    --border: 0.28 0.03 268;
+    --input: 0.28 0.03 268;
+    --ring: 0.72 0.19 28;
+
+    /* Chart colors */
+    --chart-1: 0.72 0.19 28;
+    --chart-2: 0.68 0.18 290;
+    --chart-3: 0.75 0.18 140;
+    --chart-4: 0.72 0.18 200;
+    --chart-5: 0.76 0.19 60;
+
+    /* Sidebar - slightly lighter navy */
+    --sidebar: 0.17 0.022 268;
+    --sidebar-foreground: 0.93 0.012 268;
+    --sidebar-primary: 0.72 0.19 28;
+    --sidebar-primary-foreground: 0.99 0 0;
+    --sidebar-accent: 0.22 0.032 268;
+    --sidebar-accent-foreground: 0.93 0.012 268;
+    --sidebar-border: 0.26 0.028 268;
+    --sidebar-ring: 0.72 0.19 28;
+
+    /* Custom app tokens */
+    --glow-primary: oklch(0.72 0.19 28 / 0.3);
+    --glow-accent: oklch(0.58 0.22 290 / 0.25);
+    --msg-bubble-own: oklch(0.72 0.19 28 / 0.15);
+    --msg-bubble-other: oklch(0.22 0.025 268);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+
+  .font-body {
+    font-family: "Outfit", sans-serif;
+  }
+
+  .glass {
+    background: oklch(0.18 0.022 268 / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid oklch(0.32 0.04 268 / 0.5);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 24px var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px var(--glow-accent);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: oklch(0.35 0.04 268);
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.45 0.06 268);
+  }
+}
+
+/* Animated gradient background mesh */
+.bg-mesh {
+  background: 
+    radial-gradient(ellipse at 20% 10%, oklch(0.25 0.06 290 / 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, oklch(0.22 0.05 28 / 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, oklch(0.16 0.02 268) 0%, oklch(0.12 0.015 268) 100%);
+}
+
+/* Channel list item hover shimmer */
+.channel-item {
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.channel-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, oklch(0.72 0.19 28 / 0.06), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.channel-item:hover::before {
+  transform: translateX(100%);
+}
